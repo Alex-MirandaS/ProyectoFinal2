@@ -13,6 +13,7 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.Month;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -36,11 +37,11 @@ public class ControladorCompraBoletos {
         this.principal = principal;
     }
 
-    public void verificarDatos(JComboBox partida, JComboBox destino, JTextField fecha, JTextField cantidad) {
-        if (verificarLugares(partida, destino) && verificarCBoletos(cantidad) && verificarFecha(fecha)) {
+    public void verificarDatos(JComboBox partida, JComboBox destino, JComboBox meses, JComboBox días, JTextField cantidad) {
+        if (verificarLugares(partida, destino) && verificarCBoletos(cantidad)) {
             JOptionPane.showMessageDialog(null, "OPERACIÒN EXITOSA");
             cPasajeros = Integer.parseInt(cantidad.getText());
-            verificarVuelo(partida, destino, fecha, cantidad);
+            verificarVuelo(partida, destino, LocalDate.of(2021, meses.getSelectedIndex() + 1, (int) días.getSelectedItem()), cantidad);
         }
     }
 
@@ -86,35 +87,21 @@ public class ControladorCompraBoletos {
         return false;
     }
 
-    private boolean verificarFecha(JTextField text) {
-        try {
-            String[] horaDividida = text.getText().split("/");
-            int mes = Integer.valueOf(horaDividida[0]);
-            int hora = Integer.valueOf(horaDividida[1]);
+    private boolean verificarFecha(LocalDate vuelo, LocalDate fechaSalida) {
 
-            if (text.getText().length() == 0) {
-                JOptionPane.showMessageDialog(null, "NO HAY NINGUN VALOR EN EL CAMPO");
-                return false;
-            } else if (hora < 1 || mes < 1 || hora > 24 || mes > 12) {
-                JOptionPane.showMessageDialog(null, "CANTIDAD INVALIDA, VUELVA A INTENTAR");
-                text.setText("");
-                return false;
-            } else {
-                return true;
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "CARACTER INVALIDO, SOLO SE ACEPTAN NUMERO, VUELVA A INTENTARLO");
-            text.setText("");
+        if (vuelo.compareTo(fechaSalida) < 0) {
+            return false;
+        } else {
+            return true;
         }
-        return false;
     }
 
-    private void verificarVuelo(JComboBox partida, JComboBox destino, JTextField fecha, JTextField cantidad) {
-        llenarTabla(principal.getTablaVuelos().getTabla(), Integer.parseInt(cantidad.getText()));
+    private void verificarVuelo(JComboBox partida, JComboBox destino, LocalDate fecha, JTextField cantidad) {
+        llenarTabla(principal.getTablaVuelos().getTabla(), partida, destino, fecha, Integer.parseInt(cantidad.getText()));
         principal.getTablaVuelos().setVisible(true);
     }
 
-    private void llenarTabla(JTable table, int c) {
+    private void llenarTabla(JTable table, JComboBox partida, JComboBox destino, LocalDate fecha, int c) {
         try {
             DefaultTableModel modelo = new DefaultTableModel();
             Vuelo temp;
@@ -128,10 +115,14 @@ public class ControladorCompraBoletos {
 
             for (int i = 0; i < principal.getLecturaVuelos().leerArchivos().size(); i++) {
                 temp = principal.getLecturaVuelos().leerArchivos().get(i);
-                modelo.addRow(new Object[]{i + 1, principal.getBuscarDatos().buscarCiudades(temp.getNombreAereopuertoOrigen()),
-                    principal.getBuscarDatos().buscarCiudades(temp.getNombreAereopuertoDestino()),
-                    temp.getFechaSalida(), temp.getPrecioBoleto(), temp.getPrecioBoleto() * c});
-                principal.getTablaVuelos().getListaElección().addItem("" + (i + 1));
+                if (principal.getBuscarDatos().buscarCiudades(temp.getNombreAereopuertoDestino()).equalsIgnoreCase((String) destino.getSelectedItem())
+                        && principal.getBuscarDatos().buscarCiudades(temp.getNombreAereopuertoOrigen()).equalsIgnoreCase((String) partida.getSelectedItem())
+                        && verificarFecha(temp.getFechaSalida(), fecha) == true) {
+                    modelo.addRow(new Object[]{i + 1, principal.getBuscarDatos().buscarCiudades(temp.getNombreAereopuertoOrigen()),
+                        principal.getBuscarDatos().buscarCiudades(temp.getNombreAereopuertoDestino()),
+                        temp.getFechaSalida(), temp.getPrecioBoleto(), temp.getPrecioBoleto() * c});
+                    principal.getTablaVuelos().getListaElección().addItem("" + (i + 1));
+                }
             }
         } catch (IOException e) {
 
@@ -161,7 +152,7 @@ public class ControladorCompraBoletos {
         int contador = 0;
         for (int i = 0; i < components.length; i++) {
             temp = principal.getBuscarDatos().buscarPasaporte(((PedirPasaporte) components[i]).getCodPasaporte());
-            if (temp != null && verificarVuelo(temp, vuelotemp) == true && verificarFecha(temp.getFechaEmisión())) {
+            if (temp != null && verificarVuelo(temp, vuelotemp) == true && verificarFechaPasaporte(temp.getFechaEmisión())) {
                 pasaportesTemp[contador] = temp;
                 contador++;
             }
@@ -189,7 +180,7 @@ public class ControladorCompraBoletos {
         return true;
     }
 
-    private boolean verificarFecha(LocalDate fecha) {
+    private boolean verificarFechaPasaporte(LocalDate fecha) {
         if (fecha.compareTo(vuelotemp.getFechaSalida()) < 0) {
             JOptionPane.showMessageDialog(null, "PARA ESTA FECHA, SU PASAPORTE YA HA VENCIDO");
             return false;
@@ -208,6 +199,33 @@ public class ControladorCompraBoletos {
         if (principal.getBuscarDatos().buscarTarjeta(codTarjeta, cvc) != null) {
             guardarDatos();
         }
+    }
+
+    public void refrescarFecha(JComboBox dias, JComboBox meses) {
+        dias.removeAllItems();
+        int diasTemp;
+        if (meses.getSelectedIndex() == 1) {
+            diasTemp = 28;
+        } else if (meses.getSelectedIndex() == 3 || meses.getSelectedIndex() == 5 || meses.getSelectedIndex() == 8
+                || meses.getSelectedIndex() == 10) {
+            diasTemp = 30;
+        } else {
+            diasTemp = 31;
+        }
+
+        for (int i = 0; i < diasTemp; i++) {
+            dias.addItem(i + 1);
+        }
+    }
+
+    public void llenarDatosFecha(JComboBox dias, JComboBox meses) {
+        for (int i = 0; i < ControladorConstantes.MESES.length; i++) {
+            meses.addItem(ControladorConstantes.MESES[i]);
+        }
+        for (int i = 0; i < 32; i++) {
+            dias.addItem(i + 1);
+        }
+
     }
 
     private void guardarDatos() {

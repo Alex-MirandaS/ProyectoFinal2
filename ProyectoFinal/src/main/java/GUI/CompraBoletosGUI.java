@@ -21,6 +21,7 @@ public class CompraBoletosGUI extends javax.swing.JFrame {
         this.principal = principal;
         principal.getControlCBoletos().llenarLugares(listadoLugarPartida);
         principal.getControlCBoletos().llenarLugares(listadoLugarDestino);
+        principal.getControlCBoletos().llenarDatosFecha(dias, meses);
     }
 
     @SuppressWarnings("unchecked")
@@ -53,7 +54,11 @@ public class CompraBoletosGUI extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        fechaVuelo = new javax.swing.JTextField();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        meses = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        dias = new javax.swing.JComboBox<>();
         jPanel6 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -146,12 +151,30 @@ public class CompraBoletosGUI extends javax.swing.JFrame {
 
         jPanel5.setLayout(new java.awt.BorderLayout());
 
-        jLabel8.setText("Fecha de Vuelo(HH/MM)");
+        jLabel8.setText("Fecha de Vuelo");
         jPanel5.add(jLabel8, java.awt.BorderLayout.PAGE_START);
 
         jLabel13.setText("   ");
         jPanel5.add(jLabel13, java.awt.BorderLayout.LINE_START);
-        jPanel5.add(fechaVuelo, java.awt.BorderLayout.CENTER);
+
+        jPanel9.setLayout(new java.awt.GridLayout(1, 4));
+
+        jLabel4.setText("Mes");
+        jPanel9.add(jLabel4);
+
+        meses.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                mesesItemStateChanged(evt);
+            }
+        });
+        jPanel9.add(meses);
+
+        jLabel14.setText("Día");
+        jPanel9.add(jLabel14);
+
+        jPanel9.add(dias);
+
+        jPanel5.add(jPanel9, java.awt.BorderLayout.CENTER);
 
         jPanel1.add(jPanel5);
 
@@ -172,18 +195,23 @@ public class CompraBoletosGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
-        principal.getControlCBoletos().verificarDatos(listadoLugarPartida, listadoLugarDestino, fechaVuelo, cViajeros);
+        principal.getControlCBoletos().verificarDatos(listadoLugarPartida, listadoLugarDestino, meses, dias, cViajeros);
     }//GEN-LAST:event_aceptarActionPerformed
+
+    private void mesesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_mesesItemStateChanged
+        principal.getControlCBoletos().refrescarFecha(dias, meses);
+    }//GEN-LAST:event_mesesItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptar;
     private javax.swing.JTextField cViajeros;
-    private javax.swing.JTextField fechaVuelo;
+    private javax.swing.JComboBox<String> dias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -192,6 +220,7 @@ public class CompraBoletosGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -205,7 +234,9 @@ public class CompraBoletosGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JComboBox<String> listadoLugarDestino;
     private javax.swing.JComboBox<String> listadoLugarPartida;
+    private javax.swing.JComboBox<String> meses;
     // End of variables declaration//GEN-END:variables
 }
