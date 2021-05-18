@@ -5,7 +5,7 @@
  */
 package Controladores;
 
-import GUI.PedirPasaporte;
+import ComprarBoletosGUI.PedirPasaporte;
 import Objetos.Pasaporte;
 import Objetos.Vuelo;
 import Programa.Principal;
@@ -47,10 +47,10 @@ public class ControladorCompraBoletos {
 
     public void llenarLugares(JComboBox listado) {
         try {
-            for (int i = 0; i < principal.getLecturaAereopuertos().leerArchivos().size(); i++) {
-                listado.addItem(principal.getLecturaAereopuertos().leerArchivos().get(i).getCiudad()
+            for (int i = 0; i < principal.getLectorAereopuertos().leerArchivos().size(); i++) {
+                listado.addItem(principal.getLectorAereopuertos().leerArchivos().get(i).getCiudad()
                         + ", "
-                        + principal.getLecturaAereopuertos().leerArchivos().get(i).getPais());
+                        + principal.getLectorAereopuertos().leerArchivos().get(i).getPais());
             }
         } catch (IOException e) {
 
@@ -113,8 +113,8 @@ public class ControladorCompraBoletos {
             modelo.addColumn("Precio");
             modelo.addColumn("Precio Acumulado");
 
-            for (int i = 0; i < principal.getLecturaVuelos().leerArchivos().size(); i++) {
-                temp = principal.getLecturaVuelos().leerArchivos().get(i);
+            for (int i = 0; i < principal.getLectorVuelos().leerArchivos().size(); i++) {
+                temp = principal.getLectorVuelos().leerArchivos().get(i);
                 if (principal.getBuscarDatos().buscarCiudades(temp.getNombreAereopuertoDestino()).equalsIgnoreCase((String) destino.getSelectedItem())
                         && principal.getBuscarDatos().buscarCiudades(temp.getNombreAereopuertoOrigen()).equalsIgnoreCase((String) partida.getSelectedItem())
                         && verificarFecha(temp.getFechaSalida(), fecha) == true) {
@@ -133,7 +133,7 @@ public class ControladorCompraBoletos {
 
     public void inicioPasaportes(int i) {
         try {
-            vuelotemp = principal.getLecturaVuelos().leerArchivos().get(i);
+            vuelotemp = principal.getLectorVuelos().leerArchivos().get(i);
             principal.getLlenado().setVisible(true);
             principal.getControlCBoletos().llenarPasaportes(principal.getLlenado().getPasaportes());
         } catch (IOException e) {

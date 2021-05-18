@@ -37,9 +37,9 @@ public class ControladorVentanaPersonal {
             modelo.addColumn("Fecha");
             modelo.addColumn("Cantidad Pasajeros");
 
-            for (int i = 0; i < principal.getLecturaVuelos().leerArchivos().size(); i++) {
-                temp = principal.getLecturaVuelos().leerArchivos().get(i);
-                modelo.addRow(new Object[]{i + 1, temp.getCodigoVuelo(), temp.getCodigoAvión(),
+            for (int i = 0; i < principal.getLectorVuelos().leerArchivos().size(); i++) {
+                temp = principal.getLectorVuelos().leerArchivos().get(i);
+                modelo.addRow(new Object[]{i + 1, temp.getEstado(), temp.getCodigoVuelo(),temp.getCodigoAvión(),
                     principal.getBuscarDatos().buscarCiudades(temp.getNombreAereopuertoOrigen()),
                     principal.getBuscarDatos().buscarCiudades(temp.getNombreAereopuertoDestino()),
                     temp.getFechaSalida(), temp.getPasaportesVuelo().size()});
@@ -54,7 +54,7 @@ public class ControladorVentanaPersonal {
 
     public void cambiarDatos(JComboBox lista, JLabel codigoAvión1, JLabel estado1, JLabel aereopuertoActual1, JLabel aereoDestino1, JLabel cPasajeros1) {
         try {
-            Vuelo temp = principal.getLecturaVuelos().leerArchivos().get(lista.getSelectedIndex());
+            Vuelo temp = principal.getLectorVuelos().leerArchivos().get(lista.getSelectedIndex());
             codigoAvión1.setText(temp.getCodigoAvión());
             estado1.setText(temp.getEstado());
             aereopuertoActual1.setText(principal.getBuscarDatos().buscarCiudades(temp.getNombreAereopuertoOrigen()));

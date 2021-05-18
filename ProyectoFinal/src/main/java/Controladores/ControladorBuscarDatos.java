@@ -26,10 +26,10 @@ public class ControladorBuscarDatos {
 
     public String buscarCiudades(String nombre) {
         try {
-            for (int i = 0; i < principal.getLecturaAereopuertos().leerArchivos().size(); i++) {
-                String temp = principal.getLecturaAereopuertos().leerArchivos().get(i).getNombre();
+            for (int i = 0; i < principal.getLectorAereopuertos().leerArchivos().size(); i++) {
+                String temp = principal.getLectorAereopuertos().leerArchivos().get(i).getNombre();
                 if (temp.equalsIgnoreCase(nombre)) {
-                    return principal.getLecturaAereopuertos().leerArchivos().get(i).getCiudad();
+                    return principal.getLectorAereopuertos().leerArchivos().get(i).getCiudad();
                 }
             }
         } catch (IOException e) {
@@ -43,8 +43,8 @@ public class ControladorBuscarDatos {
     public Pasaporte buscarPasaporte(JTextField verificarDatos) {
         Pasaporte temp = null;
         try {
-            for (int i = 0; i < principal.getLecturaPasaportes().leerArchivos().size(); i++) {
-                temp = principal.getLecturaPasaportes().leerArchivos().get(i);
+            for (int i = 0; i < principal.getLectorPasaportes().leerArchivos().size(); i++) {
+                temp = principal.getLectorPasaportes().leerArchivos().get(i);
                 if (Integer.parseInt(verificarDatos.getText()) == temp.getNumPasaporte()) {
                     return temp;
                 }
@@ -67,8 +67,8 @@ public class ControladorBuscarDatos {
     public Tarjeta buscarTarjeta(JTextField codTarjeta, JTextField cvc) {
         Tarjeta temp = null;
         try {
-            for (int i = 0; i < principal.getLecturaTarjetas().leerArchivos().size(); i++) {
-                temp = principal.getLecturaTarjetas().leerArchivos().get(i);
+            for (int i = 0; i < principal.getLectorTarjetas().leerArchivos().size(); i++) {
+                temp = principal.getLectorTarjetas().leerArchivos().get(i);
                 if (Integer.parseInt(codTarjeta.getText()) == temp.getNumTarjeta() && Integer.parseInt(cvc.getText()) == temp.getCodigoCVC()) {
                     return temp;
                 }
