@@ -2,6 +2,7 @@ package Programa;
 
 import Archivos.EscritorArchivosBinarios;
 import Archivos.LectorArchivosBinarios;
+import Archivos.LectorArchivosEnTexto;
 import Controladores.ControladorBuscarDatos;
 import Controladores.ControladorCompraBoletos;
 import Controladores.ControladorLogin;
@@ -30,7 +31,6 @@ import Usuarios.OperadorVuelo;
 import Usuarios.Pasajero;
 import Usuarios.Usuario;
 import java.io.IOException;
-import java.time.LocalDate;
 
 /**
  *
@@ -61,6 +61,16 @@ public class Principal {
     private LectorArchivosBinarios<Vuelo> lectorVuelos;
     private LectorArchivosBinarios<OperadorVuelo> lectorPersonal;
     private LectorArchivosBinarios<Pasajero> lectorPasajeros;
+    //Lector de Archivos Texto
+    private LectorArchivosEnTexto<Aereolínea> lectorAereolineasTexto;
+    private LectorArchivosEnTexto<Aereopuerto> lectorAereopuertosTexto;
+    private LectorArchivosEnTexto<Avión> lectorAvionesTexto;
+    private LectorArchivosEnTexto<Distancia> lectorDistanciaTexto;
+    private LectorArchivosEnTexto<Pasaporte> lectorPasaportesTexto;
+    private LectorArchivosEnTexto<RenovaciónPasaporte> lectorRenovaciónPasaporteTexto;
+    private LectorArchivosEnTexto<Reservación> lectorReservaciónTexto;
+    private LectorArchivosEnTexto<Tarjeta> lectorTarjetasTexto;
+    private LectorArchivosEnTexto<Vuelo> lectorVuelosTexto;
     //Escritores de Archivos
     private EscritorArchivosBinarios<Aereolínea> escritorAereolineas;
     private EscritorArchivosBinarios<Aereopuerto> escritorAereopuertos;
@@ -96,6 +106,17 @@ public class Principal {
         lectorVuelos = new LectorArchivosBinarios<>("Vuelos");
         lectorPersonal = new LectorArchivosBinarios<>("Personal");
         lectorPasajeros = new LectorArchivosBinarios<>("Usuarios");
+
+        //Lector Archivos Texto
+        lectorAereolineasTexto = new LectorArchivosEnTexto<>(this);
+        lectorAereopuertosTexto = new LectorArchivosEnTexto<>(this);
+        lectorAvionesTexto = new LectorArchivosEnTexto<>(this);
+        lectorDistanciaTexto = new LectorArchivosEnTexto<>(this);
+        lectorPasaportesTexto = new LectorArchivosEnTexto<>(this);
+        lectorRenovaciónPasaporteTexto = new LectorArchivosEnTexto<>(this);
+        lectorReservaciónTexto = new LectorArchivosEnTexto<>(this);
+        lectorTarjetasTexto = new LectorArchivosEnTexto<>(this);
+        lectorVuelosTexto = new LectorArchivosEnTexto<>(this);
 //Escritores de Archivos
         escritorAereolineas = new EscritorArchivosBinarios<>("Aereolineas");
         escritorAereopuertos = new EscritorArchivosBinarios<>("Aereopuertos");
@@ -153,7 +174,7 @@ public class Principal {
 
         if (opcion == 1) {//admin
             controlOperadorVuelo = new ControladorOperadorVuelo((OperadorVuelo) user);
-            controlAdministrador = new ControladorAdministrador((Administrador)user, this);
+            controlAdministrador = new ControladorAdministrador((Administrador) user, this);
         }
         if (opcion == 2) {
             controlOperadorVuelo = new ControladorOperadorVuelo((OperadorVuelo) user);
@@ -170,6 +191,46 @@ public class Principal {
 
     public void llenarDatosPersonal() {
 
+    }
+
+    public ControladorCrearObjetos getCrearObjetos() {
+        return crearObjetos;
+    }
+
+    public LectorArchivosEnTexto<Aereolínea> getLectorAereolineasTexto() {
+        return lectorAereolineasTexto;
+    }
+
+    public LectorArchivosEnTexto<Aereopuerto> getLectorAereopuertosTexto() {
+        return lectorAereopuertosTexto;
+    }
+
+    public LectorArchivosEnTexto<Avión> getLectorAvionesTexto() {
+        return lectorAvionesTexto;
+    }
+
+    public LectorArchivosEnTexto<Distancia> getLectorDistanciaTexto() {
+        return lectorDistanciaTexto;
+    }
+
+    public LectorArchivosEnTexto<Pasaporte> getLectorPasaportesTexto() {
+        return lectorPasaportesTexto;
+    }
+
+    public LectorArchivosEnTexto<RenovaciónPasaporte> getLectorRenovaciónPasaporteTexto() {
+        return lectorRenovaciónPasaporteTexto;
+    }
+
+    public LectorArchivosEnTexto<Reservación> getLectorReservaciónTexto() {
+        return lectorReservaciónTexto;
+    }
+
+    public LectorArchivosEnTexto<Tarjeta> getLectorTarjetasTexto() {
+        return lectorTarjetasTexto;
+    }
+
+    public LectorArchivosEnTexto<Vuelo> getLectorVuelosTexto() {
+        return lectorVuelosTexto;
     }
 
     public ControladorCompraBoletos getControlCBoletos() {

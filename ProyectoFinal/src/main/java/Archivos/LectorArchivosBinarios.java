@@ -27,7 +27,7 @@ public class LectorArchivosBinarios<T> {
 
     public ArrayList<T> leerArchivos() throws FileNotFoundException, IOException, ClassNotFoundException {
         ArrayList<T> objetos = new ArrayList<>();
-        archivo = new File("/home/alex/Escritorio/IPC1/tareas/ProyectoFinal.todo/ProyectoFinal/ProyectoFinal/ProyectoFinal/ArchivosPrueba/" + ubicación);
+        archivo = new File("/home/alex/Escritorio/IPC1/tareas/ProyectoFinalTodo.todo/ProyectoFinal/ArchivosPrueba/" + ubicación);
         String[] archivos = archivo.list();
         ObjectInputStream lector;
         //System.out.println("Archivos:"+archivos.length);
