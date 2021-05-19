@@ -13,17 +13,18 @@ import java.io.Serializable;
  */
 public class Tarjeta implements Serializable {
 
-    private int numTarjeta, numPasaporte, codigoCVC;
+    private String numTarjeta;
+    private int numPasaporte, codigoCVC;
     private double dineroActual;
 
-    public Tarjeta(int numTarjeta, int numPasaporte, double dineroActual, int codigoCVC) {
+    public Tarjeta(String numTarjeta, int numPasaporte, double dineroActual, int codigoCVC) {
         this.numTarjeta = numTarjeta;
         this.numPasaporte = numPasaporte;
         this.codigoCVC = codigoCVC;
         this.dineroActual = dineroActual;
     }
 
-    public int getNumTarjeta() {
+    public String getNumTarjeta() {
         return numTarjeta;
     }
 

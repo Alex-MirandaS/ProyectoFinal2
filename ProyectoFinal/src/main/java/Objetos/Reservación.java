@@ -13,10 +13,10 @@ import java.io.Serializable;
  */
 public class Reservación implements Serializable {
 
-    private String codigoVuelo;
-    private int numPasaporte, numTarjeta, numAsientosComprados;
+    private String codigoVuelo, numTarjeta;
+    private int numPasaporte, numAsientosComprados;
 
-    public Reservación(int numPasaporte, String codigoVuelo, int numTarjeta, int numAsientosComprados) {
+    public Reservación(int numPasaporte, String codigoVuelo, String numTarjeta, int numAsientosComprados) {
         this.codigoVuelo = codigoVuelo;
         this.numPasaporte = numPasaporte;
         this.numTarjeta = numTarjeta;
@@ -31,7 +31,7 @@ public class Reservación implements Serializable {
         return numPasaporte;
     }
 
-    public int getNumTarjeta() {
+    public String getNumTarjeta() {
         return numTarjeta;
     }
 

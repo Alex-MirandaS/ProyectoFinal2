@@ -16,6 +16,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -27,10 +29,11 @@ import javax.swing.JTable;
 public class ControladorOperadorVuelo {
 
     private OperadorVuelo operador;
+    private Principal prin;
 
-    public ControladorOperadorVuelo(OperadorVuelo operador) {
+    public ControladorOperadorVuelo(OperadorVuelo operador, Principal prin) {
         this.operador = operador;
-
+        this.prin = prin;
     }
 
     public void iniciarVuelo(Vuelo vuelo, LectorArchivosBinarios<Avión> aviones, JTable tabla, int fila) throws IOException, FileNotFoundException, ClassNotFoundException {
@@ -82,7 +85,12 @@ public class ControladorOperadorVuelo {
 
     private void cambiarLugarPasajeros(ArrayList<Pasaporte> pasaportes, String país) {
         for (int i = 0; i < pasaportes.size(); i++) {
-            pasaportes.get(i).setPaisActual(país);
+            try {
+                pasaportes.get(i).setPaisActual(país);
+                prin.getEscritorPasaportes().guardarObjeto(pasaportes.get(i), ""+pasaportes.get(i).getNumPasaporte());
+            } catch (IOException ex) {
+                Logger.getLogger(ControladorOperadorVuelo.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }

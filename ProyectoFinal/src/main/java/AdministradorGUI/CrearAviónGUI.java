@@ -20,6 +20,8 @@ public class CrearAviónGUI extends javax.swing.JFrame {
     public CrearAviónGUI(ControladorCrearObjetos control) {
         initComponents();
         this.control = control;
+        this.jButton1.setEnabled(false);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setTitle("Creación de Aviones");
         control.invisibleInicial(columnas, false, this);
     }
@@ -54,6 +56,11 @@ public class CrearAviónGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("Aceptar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
@@ -157,8 +164,13 @@ public class CrearAviónGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_validarCFilasColumnasActionPerformed
 
     private void validarAsientosPorColumnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validarAsientosPorColumnaActionPerformed
-        control.validarAsientoPorColumna(Integer.parseInt(cColumnas.getText()));
+        control.validarAsientoPorColumna(Integer.parseInt(cColumnas.getText()), jButton1);
     }//GEN-LAST:event_validarAsientosPorColumnaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        control.crearAviónArchivo();
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public JPanel getcFilasPorColumnas() {
         return cFilasPorColumnas;

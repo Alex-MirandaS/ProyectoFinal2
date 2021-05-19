@@ -96,9 +96,9 @@ public class Principal {
     public Principal() throws IOException {
 //Lectores de Archivos
         lectorAereolineas = new LectorArchivosBinarios<>("Aereolineas");
-        lectorAereopuertos = new LectorArchivosBinarios<>("Aereopuertos");
+        lectorAereopuertos = new LectorArchivosBinarios<>("Aeropuertos");
         lectorAviones = new LectorArchivosBinarios<>("Aviones");
-        lectorDistancia = new LectorArchivosBinarios<>("Distancia");
+        lectorDistancia = new LectorArchivosBinarios<>("Distancias");
         lectorPasaportes = new LectorArchivosBinarios<>("Pasaportes");
         lectorRenovaciónPasaporte = new LectorArchivosBinarios<>("RenovacionesPasaporte");
         lectorReservación = new LectorArchivosBinarios<>("Reservaciones");
@@ -119,9 +119,9 @@ public class Principal {
         lectorVuelosTexto = new LectorArchivosEnTexto<>(this);
 //Escritores de Archivos
         escritorAereolineas = new EscritorArchivosBinarios<>("Aereolineas");
-        escritorAereopuertos = new EscritorArchivosBinarios<>("Aereopuertos");
+        escritorAereopuertos = new EscritorArchivosBinarios<>("Aeropuertos");
         escritorAviones = new EscritorArchivosBinarios<>("Aviones");
-        escritorDistancia = new EscritorArchivosBinarios<>("Distancia");
+        escritorDistancia = new EscritorArchivosBinarios<>("Distancias");
         escritorPasaportes = new EscritorArchivosBinarios<>("Pasaportes");
         escritorRenovaciónPasaporte = new EscritorArchivosBinarios<>("RenovacionesPasaporte");
         escritorReservación = new EscritorArchivosBinarios<>("Reservaciones");
@@ -136,13 +136,6 @@ public class Principal {
         controlVentanaPersonal = new ControladorVentanaPersonal(this);
         ventanaPersonal = new ventanaPersonal(this);
         controlCrearObjetos = new ControladorCrearObjetos(this);
-
-        //mientras 
-        //escri = new EscritorArchivosBinarios("Personal");
-        //escriA = new EscritorArchivosBinarios("Vuelos");
-        //escri.guardarObjeto(new OperadorVuelo("Pedro", "123"), "Operador1");
-        //escriA.guardarObjeto(new Vuelo("256", "165", "Aereopuerto1", "Aereopuerto777", 50, LocalDate.MIN), "vuelo1");
-        //escritorPersonal.guardarObjeto(new Administrador("pepe", "123"), "admin1");
     }
 
     public void iniciar() {
@@ -157,7 +150,6 @@ public class Principal {
         llenado = new LlenadoPasaporte(this);
         pedirTarjeta = new PedirTarjeta(this);
 
-        ventanaPrincipal.setEnabled(false);
         ventanaCompraBoletos.setVisible(true);
         //desbloquearPantallaPrincipal
     }
@@ -173,13 +165,13 @@ public class Principal {
     public void concederAcceso(Usuario user, int opcion) {
 
         if (opcion == 1) {//admin
-            controlOperadorVuelo = new ControladorOperadorVuelo((OperadorVuelo) user);
+            controlOperadorVuelo = new ControladorOperadorVuelo((OperadorVuelo) user, this);
             controlAdministrador = new ControladorAdministrador((Administrador) user, this);
         }
         if (opcion == 2) {
-            controlOperadorVuelo = new ControladorOperadorVuelo((OperadorVuelo) user);
+            controlOperadorVuelo = new ControladorOperadorVuelo((OperadorVuelo) user,this);
         } else {
-            controlOperadorVuelo = new ControladorOperadorVuelo((OperadorVuelo) user);
+            controlOperadorVuelo = new ControladorOperadorVuelo((OperadorVuelo) user,this);
         }
 
         ventanaPersonal.setVisible(true);

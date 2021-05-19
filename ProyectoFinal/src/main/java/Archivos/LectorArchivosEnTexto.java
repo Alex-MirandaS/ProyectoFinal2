@@ -11,10 +11,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import javax.swing.JTextArea;
+
 
 /**
  *
@@ -51,7 +49,7 @@ public class LectorArchivosEnTexto<T> {
     }
 
     private String[] separarCampos(String linea, String inicio) {
-        String lineaDeCampos = linea.substring(inicio.length(), linea.length() - 2);
+        String lineaDeCampos = linea.substring(inicio.length(), linea.length() - 1);
        // System.out.println(lineaDeCampos);
         String[] campos = lineaDeCampos.split(",");
         return campos;

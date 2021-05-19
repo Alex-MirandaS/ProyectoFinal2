@@ -10,6 +10,7 @@ import Interfaces.ColocarImagen;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 
 /**
@@ -58,7 +59,7 @@ public class Asiento extends javax.swing.JPanel implements ColocarImagen{
     }// </editor-fold>//GEN-END:initComponents
 
     private void imagenAsientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imagenAsientoMouseClicked
-        
+                this.setBorder(new LineBorder(Color.RED, 2, true));
     }//GEN-LAST:event_imagenAsientoMouseClicked
 
 

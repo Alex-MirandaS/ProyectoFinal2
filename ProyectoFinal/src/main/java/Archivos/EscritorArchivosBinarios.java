@@ -28,7 +28,7 @@ public class EscritorArchivosBinarios<T> {
     public void guardarObjeto(T objeto, String nombre) throws IOException, FileNotFoundException {
         FileOutputStream fileOutput;
         ObjectOutputStream salida;
-        archivo = new File("/home/alex/Escritorio/IPC1/tareas/ProyectoFinal.todo/ProyectoFinal/ProyectoFinal/ProyectoFinal/ArchivosPrueba/" + ubicación);
+        archivo = new File("/home/alex/Escritorio/IPC1/tareas/ProyectoFinalTodo.todo/ProyectoFinal/Archivos/" + ubicación+"/");
         fileOutput = new FileOutputStream(archivo + "/" + nombre);
         salida = new ObjectOutputStream(fileOutput);
         salida.writeObject(objeto);

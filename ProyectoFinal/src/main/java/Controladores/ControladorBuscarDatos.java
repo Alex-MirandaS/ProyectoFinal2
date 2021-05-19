@@ -69,7 +69,7 @@ public class ControladorBuscarDatos {
         try {
             for (int i = 0; i < principal.getLectorTarjetas().leerArchivos().size(); i++) {
                 temp = principal.getLectorTarjetas().leerArchivos().get(i);
-                if (Integer.parseInt(codTarjeta.getText()) == temp.getNumTarjeta() && Integer.parseInt(cvc.getText()) == temp.getCodigoCVC()) {
+                if (codTarjeta.getText() == temp.getNumTarjeta() && Integer.parseInt(cvc.getText()) == temp.getCodigoCVC()) {
                     return temp;
                 }
             }

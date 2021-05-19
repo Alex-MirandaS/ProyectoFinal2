@@ -75,10 +75,12 @@ public class OpcionesAvanzadas extends javax.swing.JFrame {
 
     private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
         control.crearObjeto(texto.getText());
+        this.setVisible(false);
     }//GEN-LAST:event_crearActionPerformed
 
     private void cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarActionPerformed
         control.cargarObjeto(texto.getText());
+        this.setVisible(false);
     }//GEN-LAST:event_cargarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

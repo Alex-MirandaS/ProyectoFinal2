@@ -268,7 +268,7 @@ public class ventanaPersonal extends javax.swing.JFrame {
         gerente.setLayout(gerenteLayout);
         gerenteLayout.setHorizontalGroup(
             gerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 828, Short.MAX_VALUE)
+            .addGap(0, 1035, Short.MAX_VALUE)
         );
         gerenteLayout.setVerticalGroup(
             gerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,7 +333,7 @@ public class ventanaPersonal extends javax.swing.JFrame {
         jPanel9.setLayout(new java.awt.BorderLayout());
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Aereopuerto");
+        jLabel3.setText("Aeropuerto");
         jPanel9.add(jLabel3, java.awt.BorderLayout.PAGE_START);
 
         aereopuertoOpciones.setText("Opciones Avanzadas");
@@ -517,12 +517,12 @@ public class ventanaPersonal extends javax.swing.JFrame {
     }//GEN-LAST:event_tipoOrdenamientoActionPerformed
 
     private void aereopuertoOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aereopuertoOpcionesActionPerformed
-        OpcionesAvanzadas opciones = new OpcionesAvanzadas(prin.getControlAdministrador(), "Aereopuerto");
+        OpcionesAvanzadas opciones = new OpcionesAvanzadas(prin.getControlAdministrador(), "Aeropuerto");
         opciones.setVisible(true);
     }//GEN-LAST:event_aereopuertoOpcionesActionPerformed
 
     private void avionOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avionOpcionesActionPerformed
-        OpcionesAvanzadas opciones = new OpcionesAvanzadas(prin.getControlAdministrador(), "Avión");
+        OpcionesAvanzadas opciones = new OpcionesAvanzadas(prin.getControlAdministrador(), "Avion");
         opciones.setVisible(true);
     }//GEN-LAST:event_avionOpcionesActionPerformed
 

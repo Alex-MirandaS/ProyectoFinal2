@@ -229,6 +229,12 @@ public class ControladorCompraBoletos {
     }
 
     private void guardarDatos() {
-
+        for (int i = 0; i < pasaportesTemp.length; i++) {
+            if (vuelotemp.getPasaportesVuelo().size()<120) {
+                vuelotemp.getPasaportesVuelo().add(pasaportesTemp[i]);
+            }else{
+                JOptionPane.showMessageDialog(null, "EL VUELO YA ESTA LLENO");
+            }
+        }
     }
 }
